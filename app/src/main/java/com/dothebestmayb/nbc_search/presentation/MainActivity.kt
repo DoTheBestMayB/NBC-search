@@ -8,7 +8,9 @@ import androidx.core.view.WindowInsetsCompat
 import com.dothebestmayb.nbc_search.R
 import com.dothebestmayb.nbc_search.databinding.ActivityMainBinding
 import com.dothebestmayb.nbc_search.presentation.search.SearchFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 

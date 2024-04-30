@@ -10,8 +10,9 @@ import androidx.fragment.app.viewModels
 import com.dothebestmayb.nbc_search.databinding.FragmentSearchBinding
 import com.dothebestmayb.nbc_search.presentation.model.SearchListItem
 import com.dothebestmayb.nbc_search.presentation.shared.SearchSharedViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
 
     private var _binding: FragmentSearchBinding? = null

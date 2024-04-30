@@ -6,10 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dothebestmayb.nbc_search.data.retrofit.KakaoSearchRepository
 import com.dothebestmayb.nbc_search.presentation.model.SearchListItem
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SearchViewModel(
+@HiltViewModel
+class SearchViewModel @Inject constructor(
     private val kakaoSearchRepository: KakaoSearchRepository,
 ) : ViewModel() {
 
