@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.dothebestmayb.nbc_search.databinding.ActivityMainBinding
+import com.dothebestmayb.nbc_search.ui.search.SearchFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setStatusBar()
+        setFragment()
     }
 
     private fun setStatusBar() = with(binding) {
@@ -26,6 +28,12 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+
+    private fun setFragment() = with(binding) {
+        supportFragmentManager.beginTransaction()
+            .add(R.id.frame_layout, SearchFragment())
+            .commitNow()
     }
 
 }
