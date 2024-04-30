@@ -8,7 +8,7 @@ import java.util.Locale
 
 class DateAdapter {
 
-    private val parseFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA)
+    private val parseFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.KOREA)
     @ToJson
     fun toJson(datetime: Date): String {
         return formatDate(datetime)
