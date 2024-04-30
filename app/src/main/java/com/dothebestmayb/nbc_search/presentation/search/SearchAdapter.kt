@@ -10,6 +10,7 @@ import coil.load
 import com.dothebestmayb.nbc_search.R
 import com.dothebestmayb.nbc_search.databinding.ItemSearchImageBinding
 import com.dothebestmayb.nbc_search.presentation.model.PayloadType
+import com.dothebestmayb.nbc_search.presentation.model.SearchListItem
 import java.util.Locale
 
 class SearchAdapter(private val itemClickListener: SearchItemClickListener) :

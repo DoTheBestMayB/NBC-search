@@ -1,4 +1,4 @@
-package com.dothebestmayb.nbc_search.presentation.search
+package com.dothebestmayb.nbc_search.presentation.model
 
 import java.util.Date
 

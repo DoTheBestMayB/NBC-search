@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.dothebestmayb.nbc_search.databinding.FragmentSearchBinding
+import com.dothebestmayb.nbc_search.presentation.model.SearchListItem
 import com.dothebestmayb.nbc_search.presentation.shared.SearchSharedViewModel
 
 

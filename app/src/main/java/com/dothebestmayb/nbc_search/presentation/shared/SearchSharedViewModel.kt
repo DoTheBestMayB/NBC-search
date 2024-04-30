@@ -3,7 +3,7 @@ package com.dothebestmayb.nbc_search.presentation.shared
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dothebestmayb.nbc_search.presentation.search.SearchListItem
+import com.dothebestmayb.nbc_search.presentation.model.SearchListItem
 
 class SearchSharedViewModel: ViewModel() {
 
