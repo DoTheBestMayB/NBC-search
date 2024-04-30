@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setFragment() = with(binding) {
+    private fun setFragment() {
         supportFragmentManager.beginTransaction()
             .add(R.id.frame_layout, SearchFragment())
             .commitNow()
