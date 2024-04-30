@@ -63,6 +63,7 @@ class SearchFragment : Fragment() {
 
     private fun setObserve() {
         searchViewModel.item.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
             sharedViewModel.update(it)
         }
         searchViewModel.error.observe(viewLifecycleOwner) {
