@@ -3,13 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
 
     <ImageView
         android:id="@+id/iv_thumbnail"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@mipmap/ic_launcher" />
@@ -19,8 +22,8 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_margin="12dp"
-        android:visibility="gone"
         android:src="@drawable/baseline_star_24"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@id/iv_thumbnail"
         app:layout_constraintTop_toTopOf="@id/iv_thumbnail"
         app:tint="@color/light_red" />
@@ -29,6 +32,7 @@
         android:id="@+id/tv_site"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +43,7 @@
         android:id="@+id/tv_post_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_site"
         tools:text="2024-01-21 22:20:20" />
