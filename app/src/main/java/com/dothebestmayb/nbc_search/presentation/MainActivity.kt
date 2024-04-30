@@ -1,12 +1,13 @@
-package com.dothebestmayb.nbc_search
+package com.dothebestmayb.nbc_search.presentation
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.dothebestmayb.nbc_search.R
 import com.dothebestmayb.nbc_search.databinding.ActivityMainBinding
-import com.dothebestmayb.nbc_search.ui.search.SearchFragment
+import com.dothebestmayb.nbc_search.presentation.search.SearchFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
