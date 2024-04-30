@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dothebestmayb.nbc_search.data.retrofit.KakaoSearchRepository
 import com.dothebestmayb.nbc_search.presentation.model.SearchListItem
+import com.dothebestmayb.nbc_search.presentation.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,13 +23,13 @@ class SearchViewModel @Inject constructor(
 
     private val query = MutableLiveData<String>()
 
-    private val _error = MutableLiveData<ErrorType>()
-    val error: LiveData<ErrorType>
+    private val _error = MutableLiveData<Event<ErrorType>>()
+    val error: LiveData<Event<ErrorType>>
         get() = _error
 
     fun search() {
         val query = query.value ?: run {
-            _error.value = ErrorType.QUERY_IS_EMPTY
+            _error.value = Event(ErrorType.QUERY_IS_EMPTY)
             return
         }
 
@@ -37,7 +38,7 @@ class SearchViewModel @Inject constructor(
                 val items = kakaoSearchRepository.getImage(query)
                 _item.postValue(items)
             }.onFailure {
-                _error.value = ErrorType.NETWORK
+                _error.value = Event(ErrorType.NETWORK)
             }
         }
     }
@@ -50,5 +51,9 @@ class SearchViewModel @Inject constructor(
         }
         item[index] = searchListItem
         _item.value = item
+    }
+
+    fun updateQuery(text: String) {
+        query.value = text
     }
 }
