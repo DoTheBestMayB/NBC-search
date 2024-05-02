@@ -34,6 +34,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setFragment() {
+        // commitNow는 addToBackStack과 함께 사용할 수 없다.
+        // backstack에 없는 transaction은 복원되지 않는다.
+        // Configuration change가 발생하면 Activity가 파괴되고 재생성된다.
+        // 이때, commitNow로 생성한 SearchFragment는 복원되지 않아야 한다.
+        // 그런데 복원된다.
+        // Why?
         supportFragmentManager.beginTransaction()
             .add(R.id.frame_layout, SearchFragment())
             .commitNow()
