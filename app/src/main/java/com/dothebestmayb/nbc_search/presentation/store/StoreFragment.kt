@@ -1,10 +1,10 @@
 package com.dothebestmayb.nbc_search.presentation.store
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.dothebestmayb.nbc_search.databinding.FragmentStoreBinding
 import com.dothebestmayb.nbc_search.presentation.shared.SearchSharedViewModel

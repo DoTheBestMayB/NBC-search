@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.add
-import androidx.fragment.app.replace
 import com.dothebestmayb.nbc_search.R
 import com.dothebestmayb.nbc_search.databinding.ActivityMainBinding
 import com.dothebestmayb.nbc_search.presentation.search.SearchFragment

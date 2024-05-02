@@ -5,7 +5,7 @@ import com.dothebestmayb.nbc_search.presentation.model.SearchListItem
 
 class KakaoSearchRepositoryImpl(
     private val kakaoRemoteDataSource: KakaoRemoteDataSource
-): KakaoSearchRepository {
+) : KakaoSearchRepository {
 
     override suspend fun getImage(query: String): List<SearchListItem.ImageItem> {
         return kakaoRemoteDataSource.getItem(query).map {

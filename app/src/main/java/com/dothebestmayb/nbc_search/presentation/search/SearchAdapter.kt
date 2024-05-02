@@ -87,6 +87,7 @@ class SearchAdapter(private val itemClickListener: SearchItemClickListener) :
                         }
                     }
                 }
+
                 else -> {
                     super.onBindViewHolder(holder, position, payloads)
                     return

@@ -13,12 +13,12 @@ import java.util.Locale
 
 class StoreAdapter(
     private val onClick: (SearchListItem) -> Unit,
-): ListAdapter<SearchListItem, RecyclerView.ViewHolder>(diff) {
+) : ListAdapter<SearchListItem, RecyclerView.ViewHolder>(diff) {
 
     class ImageViewHolder(
         private val binding: ItemSearchImageBinding,
         private val onClick: (SearchListItem) -> Unit,
-    ): RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         private lateinit var item: SearchListItem
         private val simpleDataFormat =
@@ -50,13 +50,13 @@ class StoreAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = getItem(position)
-        when(holder) {
+        when (holder) {
             is ImageViewHolder -> holder.bind(item)
         }
     }
 
     companion object {
-        private val diff = object: DiffUtil.ItemCallback<SearchListItem>() {
+        private val diff = object : DiffUtil.ItemCallback<SearchListItem>() {
             override fun areItemsTheSame(
                 oldItem: SearchListItem,
                 newItem: SearchListItem

@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.first
 
 class SearchQueryRepositoryImpl(
     private val dataStore: DataStore<Preferences>,
-): SearchQueryRepository {
+) : SearchQueryRepository {
     override suspend fun read(key: String): String? {
         val dataStoreKey = stringPreferencesKey(key)
         val preferences = dataStore.data.first()
