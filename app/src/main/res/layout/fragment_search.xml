@@ -35,6 +35,7 @@
         android:inputType="text"
         android:maxLength="12"
         android:maxLines="1"
+        android:minHeight="50dp"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="@id/v_background"
         app:layout_constraintEnd_toStartOf="@id/btn_search"
