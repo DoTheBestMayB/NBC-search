@@ -1,10 +1,16 @@
 package com.dothebestmayb.nbc_search.presentation.search
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.widget.doOnTextChanged
@@ -45,6 +51,7 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.btnSearch.isFocusableInTouchMode = true
         setAdapter()
         setListener()
         setObserve()
@@ -55,6 +62,14 @@ class SearchFragment : Fragment() {
     }
 
     private fun setListener() = with(binding) {
+        edtSearch.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE || event == null || event.keyCode == KeyEvent.KEYCODE_ENTER) {
+                hideInput()
+                searchViewModel.search()
+                return@setOnEditorActionListener true
+            }
+            return@setOnEditorActionListener false
+        }
         edtSearch.doOnTextChanged { text, _, _, _ ->
             searchViewModel.updateQuery(text.toString())
         }
@@ -65,7 +80,10 @@ class SearchFragment : Fragment() {
     }
 
     private fun hideInput() {
-        getSystemService(requireContext(), InputMethodManager::class.java)?.hideSoftInputFromWindow(binding.root.windowToken, 0)
+        getSystemService(requireContext(), InputMethodManager::class.java)?.hideSoftInputFromWindow(
+            binding.root.windowToken,
+            0
+        )
     }
 
     private fun setObserve() {
@@ -75,7 +93,7 @@ class SearchFragment : Fragment() {
         }
         searchViewModel.error.observe(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let { errorType ->
-                val text = when(errorType) {
+                val text = when (errorType) {
                     ErrorType.QUERY_IS_EMPTY -> getString(R.string.query_is_empty)
                     ErrorType.NETWORK -> getString(R.string.network_error)
                 }
