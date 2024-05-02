@@ -97,12 +97,32 @@ class SearchFragment : Fragment() {
                 Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
             }
         }
+        searchViewModel.restoredQuery.observe(viewLifecycleOwner) {
+            binding.edtSearch.setText(it)
+        }
     }
 
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+
+        val query = savedInstanceState?.getString(BUNDLE_KEY_FOR_SEARCH_QUERY) ?: return
+
+        binding.edtSearch.setText(query)
+    }
 
     override fun onDestroyView() {
         _binding = null
 
         super.onDestroyView()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState.putString(BUNDLE_KEY_FOR_SEARCH_QUERY, binding.edtSearch.text.toString())
+    }
+
+    companion object {
+        private const val BUNDLE_KEY_FOR_SEARCH_QUERY = "BUNDLE_KEY_FOR_SEARCH_QUERY"
     }
 }

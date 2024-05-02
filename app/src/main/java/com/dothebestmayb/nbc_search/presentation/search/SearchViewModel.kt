@@ -5,16 +5,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dothebestmayb.nbc_search.data.retrofit.KakaoSearchRepository
+import com.dothebestmayb.nbc_search.data.retrofit.SearchQueryRepository
 import com.dothebestmayb.nbc_search.presentation.model.SearchListItem
 import com.dothebestmayb.nbc_search.presentation.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val kakaoSearchRepository: KakaoSearchRepository,
+    private val searchQueryRepository: SearchQueryRepository,
 ) : ViewModel() {
 
     private val _item = MutableLiveData<List<SearchListItem>>()
@@ -23,9 +24,23 @@ class SearchViewModel @Inject constructor(
 
     private val query = MutableLiveData<String>()
 
+    private val _restoredQuery = MutableLiveData<String>()
+    val restoredQuery: LiveData<String>
+        get() = _restoredQuery
+
     private val _error = MutableLiveData<Event<ErrorType>>()
     val error: LiveData<Event<ErrorType>>
         get() = _error
+
+    private val searchQueryKey = "query"
+
+    init {
+        viewModelScope.launch {
+            val query = searchQueryRepository.read(searchQueryKey) ?: return@launch
+            this@SearchViewModel.query.value = query
+            _restoredQuery.value = query
+        }
+    }
 
     fun search() {
         val query = query.value ?: run {
@@ -58,5 +73,8 @@ class SearchViewModel @Inject constructor(
 
     fun updateQuery(text: String) {
         query.value = text
+        viewModelScope.launch {
+            searchQueryRepository.save(searchQueryKey, text)
+        }
     }
 }
