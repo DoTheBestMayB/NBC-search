@@ -58,7 +58,7 @@ class SearchFragment : Fragment() {
 
     private fun setListener() = with(binding) {
         edtSearch.setOnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE || (event?.keyCode == KeyEvent.KEYCODE_ENTER)) {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE) {
                 hideInput()
                 vForRemoveFocus.requestFocus()
                 searchViewModel.search()
