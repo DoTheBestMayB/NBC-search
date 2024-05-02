@@ -44,6 +44,7 @@ class SearchAdapter(private val itemClickListener: SearchItemClickListener) :
         }
 
         fun changeBookmarkInfo(item: SearchListItem) = with(binding) {
+            this@ImageViewHolder.item = item
             ivBookmark.visibility = if (item.bookmarked) {
                 View.VISIBLE
             } else {

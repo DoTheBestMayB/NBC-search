@@ -49,7 +49,10 @@ class SearchViewModel @Inject constructor(
         if (index == -1) {
             return
         }
-        item[index] = searchListItem
+        val newItem = when (searchListItem) {
+            is SearchListItem.ImageItem -> searchListItem.copy(bookmarked = searchListItem.bookmarked.not())
+        }
+        item[index] = newItem
         _item.value = item
     }
 
