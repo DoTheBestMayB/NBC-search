@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setStatusBar()
-        setFragment()
+        setFragment(savedInstanceState)
     }
 
     private fun setStatusBar() = with(binding) {
@@ -33,10 +33,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setFragment() {
-        supportFragmentManager.beginTransaction()
-            .add(R.id.frame_layout, SearchFragment())
-            .commitNow()
+    private fun setFragment(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.frame_layout, SearchFragment())
+                .commit()
+        }
     }
-
 }
