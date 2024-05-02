@@ -13,7 +13,6 @@ data class ImageItemResponse (
 ) {
     fun toEntity(): SearchListItem.ImageItem {
         return SearchListItem.ImageItem(
-            id = UUID.randomUUID().toString(),
             siteName = displaySiteName,
             thumbnail = thumbnailUrl,
             date = datetime,

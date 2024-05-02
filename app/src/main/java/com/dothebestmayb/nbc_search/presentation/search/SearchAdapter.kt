@@ -101,7 +101,7 @@ class SearchAdapter(private val itemClickListener: SearchItemClickListener) :
                 oldItem: SearchListItem,
                 newItem: SearchListItem
             ): Boolean {
-                return oldItem.id == newItem.id
+                return oldItem.thumbnail == newItem.thumbnail
             }
 
             override fun areContentsTheSame(
@@ -115,7 +115,7 @@ class SearchAdapter(private val itemClickListener: SearchItemClickListener) :
                 oldItem: SearchListItem,
                 newItem: SearchListItem
             ): Any? {
-                return if (oldItem.id == newItem.id && oldItem.date == newItem.date && oldItem.siteName == newItem.siteName && oldItem.bookmarked != newItem.bookmarked) {
+                return if (oldItem.thumbnail == newItem.thumbnail && oldItem.date == newItem.date && oldItem.siteName == newItem.siteName && oldItem.bookmarked != newItem.bookmarked) {
                     PayloadType.BOOKMARK
                 } else {
                     null

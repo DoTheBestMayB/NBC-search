@@ -66,7 +66,7 @@ class SearchViewModel @Inject constructor(
 
     fun update(searchListItem: SearchListItem) {
         val item = _item.value?.toMutableList() ?: return
-        val index = item.indexOfFirst { it.id == searchListItem.id }
+        val index = item.indexOfFirst { it.thumbnail == searchListItem.thumbnail }
         if (index == -1) {
             return
         }
@@ -79,7 +79,7 @@ class SearchViewModel @Inject constructor(
 
     fun remove(searchListItem: SearchListItem) {
         val item = _item.value?.map {
-            if (it.id == searchListItem.id) {
+            if (it.thumbnail == searchListItem.thumbnail) {
                 when (searchListItem) {
                     is SearchListItem.ImageItem -> searchListItem.copy(bookmarked = searchListItem.bookmarked.not())
                 }

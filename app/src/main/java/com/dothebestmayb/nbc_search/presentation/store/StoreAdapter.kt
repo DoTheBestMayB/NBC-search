@@ -61,7 +61,7 @@ class StoreAdapter(
                 oldItem: SearchListItem,
                 newItem: SearchListItem
             ): Boolean {
-                return oldItem.id == newItem.id
+                return oldItem.thumbnail == newItem.thumbnail
             }
 
             override fun areContentsTheSame(

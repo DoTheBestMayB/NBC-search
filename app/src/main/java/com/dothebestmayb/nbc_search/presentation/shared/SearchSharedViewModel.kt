@@ -29,7 +29,7 @@ class SearchSharedViewModel : ViewModel() {
             return
         }
         val idx = items.indexOfFirst {
-            it.id == item.id
+            it.thumbnail == item.thumbnail
         }
         if (idx == -1) {
             if (newItem.bookmarked) {
@@ -57,7 +57,7 @@ class SearchSharedViewModel : ViewModel() {
         }
 
         val checkedItems = items.map { item ->
-            if (bookmarkedItem.any { it.id == item.id }) {
+            if (bookmarkedItem.any { it.thumbnail == item.thumbnail }) {
                 when (item) {
                     is SearchListItem.ImageItem -> item.copy(bookmarked = true)
                 }
