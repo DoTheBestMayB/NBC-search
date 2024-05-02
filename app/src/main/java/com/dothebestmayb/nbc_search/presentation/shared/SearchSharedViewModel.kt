@@ -56,7 +56,7 @@ class SearchSharedViewModel : ViewModel() {
             return
         }
 
-        items.map { item ->
+        val checkedItems = items.map { item ->
             if (bookmarkedItem.any { it.id == item.id }) {
                 when (item) {
                     is SearchListItem.ImageItem -> item.copy(bookmarked = true)
@@ -65,6 +65,6 @@ class SearchSharedViewModel : ViewModel() {
                 item
             }
         }
-        _bookmarkingCheckedItem.value = Event(items)
+        _bookmarkingCheckedItem.value = Event(checkedItems)
     }
 }
