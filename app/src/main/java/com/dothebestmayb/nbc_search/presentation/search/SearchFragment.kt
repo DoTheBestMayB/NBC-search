@@ -63,8 +63,9 @@ class SearchFragment : Fragment() {
 
     private fun setListener() = with(binding) {
         edtSearch.setOnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE || event == null || event.keyCode == KeyEvent.KEYCODE_ENTER) {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_DONE || (event?.keyCode == KeyEvent.KEYCODE_ENTER)) {
                 hideInput()
+                edtSearch.clearFocus()
                 searchViewModel.search()
                 return@setOnEditorActionListener true
             }
@@ -75,6 +76,7 @@ class SearchFragment : Fragment() {
         }
         btnSearch.setOnClickListener {
             hideInput()
+            edtSearch.clearFocus()
             searchViewModel.search()
         }
     }
