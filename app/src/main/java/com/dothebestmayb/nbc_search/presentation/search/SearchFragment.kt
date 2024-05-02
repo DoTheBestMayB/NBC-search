@@ -1,7 +1,6 @@
 package com.dothebestmayb.nbc_search.presentation.search
 
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,6 +32,7 @@ class SearchFragment : Fragment() {
     private val adapter = SearchAdapter(object : SearchItemClickListener {
         override fun onClick(item: SearchListItem) {
             searchViewModel.update(item)
+            sharedViewModel.update(item)
         }
     })
 
@@ -84,9 +84,11 @@ class SearchFragment : Fragment() {
     }
 
     private fun setObserve() {
+        searchViewModel.pendingItem.observe(viewLifecycleOwner) {
+            sharedViewModel.checkBookmark(it)
+        }
         searchViewModel.item.observe(viewLifecycleOwner) {
             adapter.submitList(it)
-            sharedViewModel.update(it)
         }
         searchViewModel.error.observe(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let { errorType ->
@@ -99,6 +101,16 @@ class SearchFragment : Fragment() {
         }
         searchViewModel.restoredQuery.observe(viewLifecycleOwner) {
             binding.edtSearch.setText(it)
+        }
+        sharedViewModel.unBookmarkedItem.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let {
+                searchViewModel.remove(it)
+            }
+        }
+        sharedViewModel.bookmarkingCheckedItem.observe(viewLifecycleOwner) { event ->
+            event.getContentIfNotHandled()?.let {
+                searchViewModel.addBookmarkingCheckedItem(it)
+            }
         }
     }
 

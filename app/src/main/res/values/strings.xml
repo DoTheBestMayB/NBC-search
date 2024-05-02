@@ -5,4 +5,6 @@
     <string name="search">검색</string>
     <string name="query_is_empty">검색어를 입력해주세요.</string>
     <string name="network_error">네트워크 에러가 발생했습니다.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

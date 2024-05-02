@@ -18,6 +18,12 @@ class SearchViewModel @Inject constructor(
     private val searchQueryRepository: SearchQueryRepository,
 ) : ViewModel() {
 
+    // 북마킹 여부를 검사하지 않은 아이템
+    private val _pendingItem = MutableLiveData<List<SearchListItem>>()
+    val pendingItem: LiveData<List<SearchListItem>>
+        get() = _pendingItem
+
+    // 북마킹 여부를 검사한 아이템
     private val _item = MutableLiveData<List<SearchListItem>>()
     val item: LiveData<List<SearchListItem>>
         get() = _item
@@ -51,7 +57,7 @@ class SearchViewModel @Inject constructor(
         viewModelScope.launch {
             runCatching {
                 val items = kakaoSearchRepository.getImage(query)
-                _item.postValue(items)
+                _pendingItem.postValue(items)
             }.onFailure {
                 _error.value = Event(ErrorType.NETWORK)
             }
@@ -71,10 +77,27 @@ class SearchViewModel @Inject constructor(
         _item.value = item
     }
 
+    fun remove(searchListItem: SearchListItem) {
+        val item = _item.value?.map {
+            if (it.id == searchListItem.id) {
+                when (searchListItem) {
+                    is SearchListItem.ImageItem -> searchListItem.copy(bookmarked = searchListItem.bookmarked.not())
+                }
+            } else {
+                it
+            }
+        } ?: listOf()
+        _item.value = item
+    }
+
     fun updateQuery(text: String) {
         query.value = text
         viewModelScope.launch {
             searchQueryRepository.save(searchQueryKey, text)
         }
+    }
+
+    fun addBookmarkingCheckedItem(items: List<SearchListItem>) {
+        _item.value = items
     }
 }

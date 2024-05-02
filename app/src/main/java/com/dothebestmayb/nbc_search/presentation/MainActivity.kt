@@ -5,9 +5,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.add
+import androidx.fragment.app.replace
 import com.dothebestmayb.nbc_search.R
 import com.dothebestmayb.nbc_search.databinding.ActivityMainBinding
 import com.dothebestmayb.nbc_search.presentation.search.SearchFragment
+import com.dothebestmayb.nbc_search.presentation.store.StoreFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setStatusBar()
+        setListener()
         setFragment(savedInstanceState)
     }
 
@@ -33,10 +37,27 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun setListener() {
+        binding.btnKeep.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.frame_layout, StoreFragment())
+                .setReorderingAllowed(true)
+                .addToBackStack(null)
+                .commit()
+        }
+        binding.btnSearch.setOnClickListener {
+            if (supportFragmentManager.fragments.last() is StoreFragment) {
+                supportFragmentManager.popBackStack()
+            }
+        }
+    }
+
     private fun setFragment(savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .add(R.id.frame_layout, SearchFragment())
+                .add<SearchFragment>(R.id.frame_layout, "init")
+//                .setReorderingAllowed(true)
+//                .addToBackStack(null)
                 .commit()
         }
     }
